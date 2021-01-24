@@ -10,7 +10,7 @@ Because we haven't gone over any Python syntax in class yet, we'll keep this exe
 
 ```python
 def my_palindrome():
-    return ''
+    return 'aba'
 ```
 
 After completing the implementation, you can run test your application by running from a terminal in this folder:
