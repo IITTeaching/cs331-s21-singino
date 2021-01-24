@@ -12,7 +12,13 @@ Fill in your own implementation of the function below:
 
 ```python
 def is_perfect(n):
-    pass
+    i = 1
+    divisors = []
+    while i < n:
+        if n % i == 0:
+            divisors.append(i)
+        i += 1
+    return sum(divisors) == n
 ```
 
 Each exercise will also be accompanied by one or more *unit tests*, each of which is meant to test some aspect of your implementation. When you run the unit test cell(s) after evaluating your implementation, you'll either find errors reported, which should help you identify what you need to fix, or they will complete silently, which means you've passed the test(s).
@@ -29,7 +35,11 @@ Complete the following function, which finds the sum of all the multiples of 3 o
 
 ```python
 def multiples_of_3_and_5(n):
-    pass
+    sum = 0
+    for i in range(n):
+        if i % 3 == 0 or i % 5 == 0:
+            sum += i
+    return sum
 ```
 
 ## Exercise 3: Integer Right Triangles
@@ -37,6 +47,18 @@ def multiples_of_3_and_5(n):
 Given a perimeter of 60, we can find two right triangles with integral length sides: `[(10, 24, 26), (15, 20, 25)]`. Complete the following function, which takes an integer `p` and returns the number of unique integer right triangles with perimeter `p`.
 
 Note that your solution should take care to limit the number of triangles it tests --- **your function must complete in under 3 seconds for all values of `p` used in the tests to earn credit.**
+
+```python
+def integer_right_triangles(p):
+    options = []
+    for m in range(1, p // 2):
+        n = p * (p - 2 * m) / (p - m) / 2
+        if int(n) == n:
+            pair = tuple(sorted((n, m)))
+            if pair not in options:
+                options.append(pair)
+    return len(options)
+```
 
 ## Exercise 4: Simple ASCII Art
 
@@ -76,7 +98,11 @@ Complete the `gen_pattern` function shown below:
 
 ```python
 def gen_pattern(chars):
-    pass
+    length = 4*len(chars) - 3
+    for i in range(len(chars) * 2 - 1):
+        charNum = i if i < len(chars) else 2 * len(chars) - i - 2
+        string = chars[::-1][:charNum + 1] + chars[len(chars) - charNum:]
+        print('.'.join(list(string)).center(length, '.'))
 ```
 
 ## Testing your implementation
