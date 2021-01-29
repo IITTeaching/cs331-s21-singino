@@ -88,7 +88,7 @@ def gen_pattern(chars):
     for i in range(len(chars) * 2 - 1):
         charNum = i if i < len(chars) else 2 * len(chars) - i - 2
         string = chars[::-1][:charNum + 1] + chars[len(chars) - charNum:]
-        print('.'.join(list(string)).center(length, '.'))
+        print('.'.join(string).center(length, '.'))
 
 def test4():
     tc = unittest.TestCase()
