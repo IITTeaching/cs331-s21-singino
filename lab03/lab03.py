@@ -31,17 +31,18 @@ def mybinsearch(lst: List[T], elem: S, compare: Callable[[T, S], int]) -> int:
     position of the first (leftmost) match for elem in lst. If elem does not
     exist in lst, then return -1.
     """
-    offset = 0
-    while len(lst) > 0:
-        p = compare(lst[len(lst) // 2], elem)
-        if p == 0:
-          return len(lst) // 2 + offset
-        elif p == 1:
-          lst = lst[:len(lst) // 2]
+    (low, high, res) = (0, len(lst) - 1, -1)
+    while low <= high:
+        mid = (low + high) // 2
+        compResult = compare(lst[mid], elem)
+        if compResult == 1:
+            high = mid - 1
+        elif compResult == -1:
+            low = mid + 1
         else:
-          offset += len(lst) // 2 + 1
-          lst = lst[len(lst) // 2 + 1:]
-    return -1
+            res = mid
+            high = mid - 1
+    return res
 
 class Student():
     """Custom class to test generic sorting and searching."""
