@@ -31,18 +31,17 @@ def mybinsearch(lst: List[T], elem: S, compare: Callable[[T, S], int]) -> int:
     position of the first (leftmost) match for elem in lst. If elem does not
     exist in lst, then return -1.
     """
-    (low, high, res) = (0, len(lst) - 1, -1)
+    (low, high) = (0, len(lst) - 1)
     while low <= high:
         mid = (low + high) // 2
         compResult = compare(lst[mid], elem)
-        if compResult == 1:
+        if compResult == 0:
+          return mid
+        elif compResult == 1:
             high = mid - 1
-        elif compResult == -1:
-            low = mid + 1
         else:
-            res = mid
-            high = mid - 1
-    return res
+            low = mid + 1
+    return -1
 
 class Student():
     """Custom class to test generic sorting and searching."""
@@ -194,7 +193,10 @@ class SuffixArray():
         Returns all the positions of searchstr in the documented indexed by the suffix array.
         """
         compareFunction = lambda a, b: 0 if self.document[a:][:len(b)] == b else -1 if self.document[a] < b else 1
-        return [mybinsearch(self.suffixArray, searchstr, compareFunction)]
+        pos = mybinsearch(self.suffixArray, searchstr, compareFunction)
+        while self.document[self.suffixArray[pos]:][:len(searchstr)] == searchstr:
+          pos -= 1
+        return [pos + 1]
 
 
     def contains(self, searchstr: str):
