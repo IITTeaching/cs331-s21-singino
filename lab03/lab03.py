@@ -194,6 +194,8 @@ class SuffixArray():
         """
         compareFunction = lambda a, b: 0 if self.document[a:][:len(b)] == b else -1 if self.document[a] < b else 1
         pos = mybinsearch(self.suffixArray, searchstr, compareFunction)
+        if pos == -1:
+          return []
         while self.document[self.suffixArray[pos]:][:len(searchstr)] == searchstr:
           pos -= 1
         return [pos + 1]
