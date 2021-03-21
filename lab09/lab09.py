@@ -125,8 +125,7 @@ class HBStree:
             min = node.right
             while min.left:
               min = min.left
-            return self.INode(min, node.left, recursiveDelete(node.right, min))
-
+            return self.INode(min.val, node.left, recursiveDelete(node.right, min.val))
         if key in self:
           self.root_versions.append(recursiveDelete(self.root_versions[-1],key))
         # END SOLUTION
