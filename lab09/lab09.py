@@ -129,8 +129,6 @@ class HBStree:
 
         if key in self:
           self.root_versions.append(recursiveDelete(self.root_versions[-1],key))
-          #for n in range(len(movementList), 0, -1):
-
         # END SOLUTION
 
     @staticmethod
