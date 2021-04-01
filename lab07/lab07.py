@@ -37,7 +37,10 @@ class ExtensibleHashTable:
     def __setitem__(self, key, value):
         # BEGIN_SOLUTION
         index = key % self.n_buckets
-        while self.buckets[index] != None and self.buckets[index][0] != key:
+        while self.buckets[index] != None:
+          if self.buckets[index][0] == key:
+            self.buckets[index][1] = value
+            return
           index += 1
           index %= self.n_buckets
         self.buckets[index] = [key, value]
