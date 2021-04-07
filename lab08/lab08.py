@@ -221,7 +221,7 @@ def topk(items, k, keyf):
       elif keyf(minHeap.peek()) < keyf(item):
         minHeap.pop()
         minHeap.add(item)
-    return minHeap.data[::-1]
+    return sorted(minHeap.data, key=revkey)
     ### END SOLUTION
 
 ################################################################################
