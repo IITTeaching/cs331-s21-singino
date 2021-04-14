@@ -15,6 +15,9 @@ class AVLTree:
 
         def rotate_left(self):
             ### BEGIN SOLUTION
+            n = self.right
+            self.val, n.val = n.val, self.val
+            self.right, n.right, self.left, n.left = n.right, n.left, n, self.left
             ### END SOLUTION
 
         @staticmethod
@@ -31,16 +34,65 @@ class AVLTree:
     @staticmethod
     def rebalance(t):
         ### BEGIN SOLUTION
+        def balance(node):
+          return AVLTree.Node.height(node.left) - AVLTree.Node.height(node.right)
+        nodeBal = balance(t)
+        if nodeBal < 0:
+          if balance(t.right) > 0:
+            t.right.rotate_right()
+          t.rotate_left()
+          AVLTree.rebalance(t.left)
+        elif nodeBal > 0:
+          if balance(t.left) < 0:
+            t.left.rotate_left()
+          t.rotate_right()
+          AVLTree.rebalance(t.right)
         ### END SOLUTION
 
     def add(self, val):
         assert(val not in self)
         ### BEGIN SOLUTION
+        def recursiveInsert(node, key):
+          if not node:
+            return self.Node(key)
+          elif key < node.val:
+            node.left = recursiveInsert(node.left, key)
+          else:
+            node.right = recursiveInsert(node.right,key)
+          AVLTree.rebalance(node)
+          return node
+
+        if self.size == 0:
+          self.root = self.Node(val)
+        else:
+          recursiveInsert(self.root, val)
+        self.size += 1
         ### END SOLUTION
 
     def __delitem__(self, val):
         assert(val in self)
         ### BEGIN SOLUTION
+        def recursiveDelete(node, key):
+          if not node:
+            return node
+          elif key < node.val:
+            node.left = recursiveDelete(node.left, key)
+          elif key > node.val:
+            node.right = recursiveDelete(node.right,key)
+          else:
+            if not node.left:
+              return node.right
+            elif not node.right:
+              return node.left
+            min = node.right
+            while min.left:
+              min = min.left
+            node.val = min.val
+            node.right = recursiveDelete(node.right, min.val)
+          AVLTree.rebalance(node)
+          return node
+        self.root = recursiveDelete(self.root, val)
+        self.size -= 1
         ### END SOLUTION
 
     def __contains__(self, val):
