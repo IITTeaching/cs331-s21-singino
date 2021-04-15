@@ -15,9 +15,12 @@ class AVLTree:
 
         def rotate_left(self):
             ### BEGIN SOLUTION
+<<<<<<< HEAD
             n = self.right
             self.val, n.val = n.val, self.val
             self.right, n.right, self.left, n.left = n.right, n.left, n, self.left
+=======
+>>>>>>> 48d025b587b04202bf53343d8163ee6ff49ed76d
             ### END SOLUTION
 
         @staticmethod
@@ -34,6 +37,7 @@ class AVLTree:
     @staticmethod
     def rebalance(t):
         ### BEGIN SOLUTION
+<<<<<<< HEAD
         def balance(node):
           return AVLTree.Node.height(node.left) - AVLTree.Node.height(node.right)
         nodeBal = balance(t)
@@ -47,11 +51,14 @@ class AVLTree:
             t.left.rotate_left()
           t.rotate_right()
           AVLTree.rebalance(t.right)
+=======
+>>>>>>> 48d025b587b04202bf53343d8163ee6ff49ed76d
         ### END SOLUTION
 
     def add(self, val):
         assert(val not in self)
         ### BEGIN SOLUTION
+<<<<<<< HEAD
         def recursiveInsert(node, key):
           if not node:
             return self.Node(key)
@@ -67,11 +74,14 @@ class AVLTree:
         else:
           recursiveInsert(self.root, val)
         self.size += 1
+=======
+>>>>>>> 48d025b587b04202bf53343d8163ee6ff49ed76d
         ### END SOLUTION
 
     def __delitem__(self, val):
         assert(val in self)
         ### BEGIN SOLUTION
+<<<<<<< HEAD
         def recursiveDelete(node, key):
           if not node:
             return node
@@ -93,6 +103,8 @@ class AVLTree:
           return node
         self.root = recursiveDelete(self.root, val)
         self.size -= 1
+=======
+>>>>>>> 48d025b587b04202bf53343d8163ee6ff49ed76d
         ### END SOLUTION
 
     def __contains__(self, val):
