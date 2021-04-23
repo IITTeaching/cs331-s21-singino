@@ -13,17 +13,17 @@ def radixSort(data):
 
 def singleDigits():
   tc = TestCase()
-  lst = list(range(10))[::-1]
+  lst = [str(n) for n in list(range(10))[::-1]]
   tc.assertEqual(sorted(lst), radixSort(lst))
 
 def multipleDigits():
   tc = TestCase()
-  lst = list(range(0, 500, 7))[::-1]
+  lst = [str(n) for n in list(range(0, 500, 7))[::-1]]
   tc.assertEqual(sorted(lst), radixSort(lst))
 
 def randomNumbersBase10():
   tc = TestCase()
-  lst = [random.randint(0, 1000) for _ in range(200)]
+  lst = [str(random.randint(0, 1000)) for _ in range(200)]
   tc.assertEqual(sorted(lst), radixSort(lst))
 
 def randomStringsSameLength():
