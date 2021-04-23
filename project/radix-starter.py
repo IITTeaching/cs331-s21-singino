@@ -44,10 +44,8 @@ def randomStringsRandomLength():
 def book():
   tc = TestCase()
   bookUrl = 'https://www.gutenberg.org/files/84/84-0.txt'
-  file = urllib.request.urlopen(bookUrl)
-  lst = []
-  for line in file:
-    lst += str(line.decode("utf-8-sig")).split()
+  file = urllib.request.urlopen(bookUrl).read().decode()
+  lst = [str(n)[2:-1] for n in file.encode('ascii','replace').split()]
   tc.assertEqual(sorted(lst), radixSort(lst))
 
 ###
