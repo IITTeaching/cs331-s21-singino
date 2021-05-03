@@ -5,18 +5,69 @@ def quicksort(lst,pivot_fn):
 
 def qsort(lst,low,high,pivot_fn):
     ### BEGIN SOLUTION
+    if low >= high:
+      return
+    pivot = pivot_fn(lst, low, high)
+    qsort(lst, low, pivot - 1, pivot_fn)
+    qsort(lst, pivot + 1, high, pivot_fn)
     ### END SOLUTION
 
 def pivot_first(lst,low,high):
     ### BEGIN SOLUTION
+    n = low
+    pivot = lst[n]
+    low += 1
+    while True:
+      while low <= high and lst[high] >= pivot:
+        high -= 1
+      while low <= high and lst[low] <= pivot:
+        low += 1
+      if low <= high:
+        lst[low], lst[high] = lst[high], lst[low]
+      else:
+        break
+    lst[n], lst[high] = lst[high], lst[n]
+    return high
     ### END SOLUTION
 
 def pivot_random(lst,low,high):
     ### BEGIN SOLUTION
+    n = random.randrange(low, high)
+    pivot = lst[n]
+    lst[low], lst[n] = lst[n], lst[low]
+    n = low
+    low += 1
+    while True:
+      while low <= high and lst[high] >= pivot:
+        high -= 1
+      while low <= high and lst[low] <= pivot:
+        low += 1
+      if low <= high:
+        lst[low], lst[high] = lst[high], lst[low]
+      else:
+        break
+    lst[n], lst[high] = lst[high], lst[n]
+    return high
     ### END SOLUTION
 
 def pivot_median_of_three(lst,low,high):
     ### BEGIN SOLUTION
+    n = high if (lst[high] - lst[low]) * (lst[high] - lst[(low + high) // 2]) <= 0 else (low + high) // 2 if (lst[(low + high) // 2] - lst[low]) * (lst[(low + high) // 2] - lst[high]) <= 0 else low
+    pivot = lst[n]
+    lst[low], lst[n] = lst[n], lst[low]
+    n = low
+    low += 1
+    while True:
+      while low <= high and lst[high] >= pivot:
+        high -= 1
+      while low <= high and lst[low] <= pivot:
+        low += 1
+      if low <= high:
+        lst[low], lst[high] = lst[high], lst[low]
+      else:
+        break
+    lst[n], lst[high] = lst[high], lst[n]
+    return high
     ### END SOLUTION
 
 ################################################################################
