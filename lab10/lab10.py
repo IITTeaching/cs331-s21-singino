@@ -34,19 +34,14 @@ class AVLTree:
     @staticmethod
     def rebalance(t):
         ### BEGIN SOLUTION
-        def balance(node):
-          return AVLTree.Node.height(node.left) - AVLTree.Node.height(node.right)
-        nodeBal = balance(t)
-        if nodeBal < 0:
-          if balance(t.right) > 0:
-            t.right.rotate_right()
-          t.rotate_left()
-          AVLTree.rebalance(t.left)
-        elif nodeBal > 0:
-          if balance(t.left) < 0:
+        if height(t.left) - height(t.right) > 1:
+          if height(t.left.left) - height(t.left.right) < 0:
             t.left.rotate_left()
           t.rotate_right()
-          AVLTree.rebalance(t.right)
+        elif height(t.left) - height(t.right) < -1:
+          if height(t.right.left) - height(t.right.right) > 0:
+            t.right.rotate_right()
+          t.rotate_left()
         ### END SOLUTION
 
     def add(self, val):
