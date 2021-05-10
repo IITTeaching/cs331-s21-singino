@@ -1,4 +1,5 @@
 import urllib.request
+from unittest import TestCase
 
 def cleanData(data, maxLen):
   lst = []
@@ -43,6 +44,11 @@ def radixSort(data):
 def radix_a_book(book_url='https://www.gutenberg.org/files/84/84-0.txt'):
   file = urllib.request.urlopen(book_url).read().decode()
   lst = [str(n)[2:-1] for n in file.encode('ascii','replace').split()]
-  return radixSort(lst)
+  sortedBook = radixSort(lst)
 
-print(radix_a_book())
+  tc = TestCase()
+  tc.assertEqual(sorted(lst), sortedBook)
+
+  return sortedBook
+
+radix_a_book()
