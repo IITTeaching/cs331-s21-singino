@@ -20,12 +20,11 @@ def largest(data):
   return largest
 
 def positionSort(lst, pos):
-  output = []
   bucketSize = 256
   count = [0] * bucketSize
   buckets = [[] for _ in range(bucketSize)]
-  for n in range(len(lst)):
-    buckets[ord(lst[n][pos]) % bucketSize].append(lst[n])
+  for item in lst:
+    buckets[ord(item[pos]) % bucketSize].append(item)
   return [item for bucket in buckets for item in bucket]
 
 def radixSort(data):
