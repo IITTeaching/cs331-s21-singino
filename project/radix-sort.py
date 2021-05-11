@@ -21,7 +21,6 @@ def largest(data):
 
 def positionSort(lst, pos):
   bucketSize = 256
-  count = [0] * bucketSize
   buckets = [[] for _ in range(bucketSize)]
   for item in lst:
     buckets[ord(item[pos]) % bucketSize].append(item)
